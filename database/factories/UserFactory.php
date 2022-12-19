@@ -21,9 +21,13 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $gender = $this->faker->randomElement(['male', 'female']);
+
         return [
-            'name' => $this->faker->name,
-            'email' => $this->faker->unique()->safeEmail,
+            'name' => $this->faker->name($gender),
+            'birth_date' => $this->faker->date('Y-m-d'),
+            'birth_place' => $this->faker->country(),
+            'gender' => $gender
         ];
     }
 }

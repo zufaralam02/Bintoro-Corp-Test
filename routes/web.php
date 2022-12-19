@@ -22,3 +22,5 @@ $router->get('/user/{id}', 'UserController@show');
 $router->post('/user', 'UserController@create');
 $router->put('/user/{id}', 'UserController@update');
 $router->delete('/user/{id}', 'UserController@destroy');
+$router->get('/group', 'UserController@group');
+$router->get('/test', 'UserController@test');

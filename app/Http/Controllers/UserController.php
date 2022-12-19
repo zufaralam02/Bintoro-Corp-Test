@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -73,5 +74,42 @@ class UserController extends Controller
         $user->delete();
 
         return response()->json(['message' => 'Data deleted successfully'], 200);
+    }
+
+    public function group()
+    {
+        // $user = User::select('birth_place', DB::raw('count(*) as jumlah_data_user'))
+        //     ->groupBy('birth_place')
+        //     ->get();
+
+        $user = User::get(['id', 'name', 'birth_date', 'gender', 'birth_place'])->groupBy('birth_place');
+
+        // $user = [];
+
+        // $birthPlace = User::select('birth_place')->get();
+
+        // foreach ($birthPlace as $bp) {
+        //     if (in_array($bp->birth_place, $user)) {
+        //         continue;
+        //     }
+
+        //     $user[] = $bp->birth_place;
+        // }
+
+        return response()->json($user);
+    }
+
+    public function test()
+    {
+        for ($i = 1; $i <= 5; $i++) {
+            for ($j = 1; $j <= 8; $j++) {
+                if ($j == $i + 1 || $j == $i + 2) {
+                    echo "*";
+                } else {
+                    echo $j;
+                }
+            }
+            echo "\n";
+        }
     }
 }
